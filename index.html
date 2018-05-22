@@ -9,28 +9,33 @@
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
     </head>
 
-    <body >
+    <body>
+        <div class="w3-bar w3-black" style="position:fixed; margin-top:0px;">
+                <div class="w3-bar-item w3-black">JSON Tranlation Editor</div>
+                <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="addListItem()"><i class="fas fa-plus"></i></button>
+                <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="saveBrowserCache()"><i class="fas fa-save"></i></button>
+                <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="openFileSaveDialog()"><i class="fas fa-download"></i></button>
+                <button class="w3-bar-item w3-button w3-right" onclick="openFileExportDialog()"><i class="fas fa-cogs"></i></button>
+                <button class="w3-bar-item w3-button w3-right" onclick="upload()"><i class="fas fa-upload"></i></button>
+                <button class="w3-bar-item w3-button w3-right" onclick="importJSONObject()"><i class="fas fa-box"></i></button>
+                <button class="w3-bar-item w3-btn w3-right"><i></i></button>
+                <button class="w3-bar-item w3-button w3-right" onclick="removeListItem()"><i class="fas fa-minus"></i></button>
+                <button class="w3-bar-item w3-button w3-right" onclick="clearList()"><i class="fas fa-bomb"></i></button>
+        </div>
+        &nbsp;
         <div class="w3-row w3-container">
             <div class="w3-third"><h2>Key</h2></div>
             <div class="w3-third"><h2>Value</h2></div>
             <div class="w3-third"><h2>New Value</h2></div>
         </div>
+        <!--First inner child is the list item template.-->
         <div id="list" class="w3-container">
-            <div class="w3-row" style="margin-bottom: 8px;">
+            <div class="w3-row w3-border-dark-grey" style="margin-bottom: 8px;" onclick="listItemClickHandler(this)">
                 <div class="w3-third" style="padding-right:5px;"><input type="text" class="w3-input w3-border-right w3-pale-red" /></div>
                 <div class="w3-third" style="padding-right:5px;"><input type="text" class="w3-input w3-border-right w3-pale-green" /></div>
                 <div class="w3-third" style="padding-right:5px;"><input type="text" class="w3-input w3-pale-blue" /></div>
             </div>
         </div>
-
-        <div class="w3-bar w3-black w3-display-bottomright">
-            <div class="w3-bar-item w3-black">JSON Tranlation Editor</div>
-            <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="addListItem()"><i class="fas fa-plus"></i></button>
-            <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="saveBrowserCache()"><i class="fas fa-save"></i></button>
-            <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="openFileSaveDialog()"><i class="fas fa-hdd"></i></button>
-            <button class="w3-bar-item w3-button w3-right" onclick="openFileExportDialog()"><i class="fas fa-file-alt"></i></button>
-        </div>
-
 
         <div id="file-save-modal" class="w3-modal">
             <div class="w3-modal-content">

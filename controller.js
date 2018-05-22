@@ -7,10 +7,12 @@ const NEW_VALUE_INDEX = 2;
 const SAVED_DATA_KEY = "SaveData";
 const DOWNLOAD_TEXT = "Download";
 const EXPORT_TEXT = "Export";
+const SELECTED_COLOR = "w3-bottombar";
 var downloadFileCallback = saveAsFile;
 var fileName = "*.json";
 var exportFileName = "*.json";
 var fileNameInputElement;
+var selectedItem = null;
 
 window.onload = function(e)
 {
@@ -25,7 +27,19 @@ window.onload = function(e)
 
 function addListItem()
 {
-    list.appendChild(listItemTemplate.cloneNode(true));
+    if(selectedItem == null)
+        list.appendChild(listItemTemplate.cloneNode(true));
+    else
+        list.insertBefore(listItemTemplate.cloneNode(true), selectedItem.nextSibling);
+}
+
+function removeListItem()
+{
+    if(selectedItem != null)
+    {
+        list.removeChild(selectedItem);
+        selectedItem = null;
+    }
 }
 
 function ListItem(key, value, newValue)
@@ -149,4 +163,41 @@ function exportFileCallback()
 
     download(JSON.stringify(obj), exportFileName);
     document.getElementById('file-save-modal').style.display = 'none';
+}
+
+function listItemClickHandler(listItem)
+{
+    console.log(listItem.tagName);
+
+    if(selectedItem != null && selectedItem != listItem)
+        selectedItem.classList.remove(SELECTED_COLOR);
+
+    selectedItem = listItem;
+
+    if(!selectedItem.classList.contains(SELECTED_COLOR))
+        selectedItem.classList.add(SELECTED_COLOR);
+
+}
+
+function loadFile()
+{
+
+}
+
+function importJSONObject()
+{
+
+}
+
+function upload()
+{
+
+}
+
+function clearList()
+{
+    while(list.children.length != 0)
+            list.removeChild(list.lastElementChild);
+
+    list.appendChild(listItemTemplate.cloneNode(true));
 }
