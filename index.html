@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JSON Translation Editor</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf8" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <script src="controller.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
+    </head>
+
+    <body >
+        <div class="w3-row w3-container">
+            <div class="w3-third"><h2>Key</h2></div>
+            <div class="w3-third"><h2>Value</h2></div>
+            <div class="w3-third"><h2>New Value</h2></div>
+        </div>
+        <div id="list" class="w3-container">
+            <div class="w3-row" style="margin-bottom: 8px;">
+                <div class="w3-third" style="padding-right:5px;"><input type="text" class="w3-input w3-border-right w3-pale-red" /></div>
+                <div class="w3-third" style="padding-right:5px;"><input type="text" class="w3-input w3-border-right w3-pale-green" /></div>
+                <div class="w3-third" style="padding-right:5px;"><input type="text" class="w3-input w3-pale-blue" /></div>
+            </div>
+        </div>
+
+        <div class="w3-bar w3-black w3-display-bottomright">
+            <div class="w3-bar-item w3-black">JSON Tranlation Editor</div>
+            <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="addListItem()"><i class="fas fa-plus"></i></button>
+            <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="saveBrowserCache()"><i class="fas fa-save"></i></button>
+            <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="openFileSaveDialog()"><i class="fas fa-hdd"></i></button>
+            <button class="w3-bar-item w3-button w3-right" onclick="openFileExportDialog()"><i class="fas fa-file-alt"></i></button>
+        </div>
+
+
+        <div id="file-save-modal" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container" style="height: 175px;">
+                    <!--Close button-->
+                    <span onclick="document.getElementById('file-save-modal').style.display='none'"
+                        class="w3-button w3-display-topright w3-red">&times;</span>
+
+                    <h2>File Name:</h2>
+                    <input id="file-name-input" type="text" class="w3-input"/>
+
+                    <p></p>
+                    <button id="downloadButton" class="w3-button w3-green w3-bar" onclick="downloadFileCallback()"></button>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
