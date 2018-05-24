@@ -16,8 +16,7 @@
                 <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="saveBrowserCache()"><i class="fas fa-save"></i></button>
                 <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="openFileSaveDialog()"><i class="fas fa-download"></i></button>
                 <button class="w3-bar-item w3-button w3-right" onclick="openFileExportDialog()"><i class="fas fa-cogs"></i></button>
-                <button class="w3-bar-item w3-button w3-right" onclick="upload()"><i class="fas fa-upload"></i></button>
-                <button class="w3-bar-item w3-button w3-right" onclick="importJSONObject()"><i class="fas fa-box"></i></button>
+                <button class="w3-bar-item w3-button w3-right" onclick="displayUploadDialog()"><i class="fas fa-upload"></i></button>
                 <button class="w3-bar-item w3-btn w3-right"><i></i></button>
                 <button class="w3-bar-item w3-button w3-right" onclick="removeListItem()"><i class="fas fa-minus"></i></button>
                 <button class="w3-bar-item w3-button w3-right" onclick="clearList()"><i class="fas fa-bomb"></i></button>
@@ -49,6 +48,23 @@
 
                     <p></p>
                     <button id="downloadButton" class="w3-button w3-green w3-bar" onclick="downloadFileCallback()"></button>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="file-upload-modal" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container" style="height: 175px;">
+                    <!--Close button-->
+                    <span onclick="document.getElementById('file-upload-modal').style.display='none'"
+                        class="w3-button w3-display-topright w3-red">&times;</span>
+
+                    <h2>File Name:</h2>
+                    <input id="file-upload-input" type="file" class="w3-input" accept=".json"/>
+
+                    <p></p>
+                    <button id="uploadButton" class="w3-button w3-green w3-bar" onclick="loadFile()">Upload</button>
                     <p></p>
                 </div>
             </div>

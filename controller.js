@@ -105,6 +105,23 @@ function saveBrowserCache()
     }
 }
 
+function displayLoadedJSON(data)
+{
+    while(list.children.length != 0)
+    list.removeChild(list.lastElementChild);
+
+    data.forEach(function (item){
+        var copy = listItemTemplate.cloneNode(true);
+
+        var inputs = copy.getElementsByTagName("input");
+        inputs[KEY_INDEX].value = item.key;
+        inputs[VALUE_INDEX].value = item.value;
+        inputs[NEW_VALUE_INDEX].value = item.newValue;
+
+        list.appendChild(copy);
+    });
+}
+
 function loadBrowserCache()
 {
     if(typeof(Storage) !== "undefined")
@@ -116,19 +133,7 @@ function loadBrowserCache()
 
         data = JSON.parse(data);
 
-        while(list.children.length != 0)
-            list.removeChild(list.lastElementChild);
-
-        data.forEach(function (item){
-            var copy = listItemTemplate.cloneNode(true);
-
-            var inputs = copy.getElementsByTagName("input");
-            inputs[KEY_INDEX].value = item.key;
-            inputs[VALUE_INDEX].value = item.value;
-            inputs[NEW_VALUE_INDEX].value = item.newValue;
-
-            list.appendChild(copy);
-        });
+        displayLoadedJSON(data);
     }
     else
     {
@@ -181,17 +186,44 @@ function listItemClickHandler(listItem)
 
 function loadFile()
 {
+    var fileInput = document.getElementById("file-upload-input");
 
+    var file = fileInput.files[0];
+
+    if(file)
+    {
+        var reader = new FileReader();
+        reader.onload = function(e)
+        {   
+            try
+            {
+                console.log(e.target.result);
+                var json = JSON.parse(e.target.result);
+
+                if(Array.isArray(json))
+                    displayLoadedJSON(json);
+                else
+                    importJSONObject(json);
+
+                document.getElementById("file-upload-modal").style.display = "none";
+            }
+            catch(syntaxError)
+            {
+                alert("Internal Error or invalid file.");
+            }
+        }   
+        reader.readAsText(file);
+    }   
 }
 
-function importJSONObject()
+function importJSONObject(data)
 {
-
+    displayLoadedJSON(Object.keys(data).map(function(key) {return new ListItem(key, data[key], "")}));
 }
 
-function upload()
+function displayUploadDialog()
 {
-
+    document.getElementById("file-upload-modal").style.display = "block";
 }
 
 function clearList()
