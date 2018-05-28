@@ -1,20 +1,40 @@
-var listItemTemplate;
-var list;
+/**
+ * @filename: controller.js
+ * @author Alexander Poganatz
+ * @author a_poganatz@outlook.com
+ * @author poganatz.ca
+ * @version 0.2
+ * @date 2018-05-18
+ * @brief implementation of JSON-Translator-Editor
+ */
 
+var listItemTemplate; // Generic list item node to clone
+var list; // Reference to the list element
+
+// Index in an array of input elements
 const KEY_INDEX = 0;
 const VALUE_INDEX = 1;
 const NEW_VALUE_INDEX = 2;
+
+// local storage keys
 const SAVED_DATA_KEY = "SaveData";
 const DOWNLOAD_TEXT = "Download";
+
 const EXPORT_TEXT = "Export";
-const SELECTED_COLOR = "w3-bottombar";
+const SELECTED_CLASS = "w3-bottombar";
+
 var downloadFileCallback = saveAsFile;
+
 var fileName = "*.json";
 var exportFileName = "*.json";
 var fileNameInputElement;
 var selectedItem = null;
 
-window.onload = function(e)
+/**
+ * @fn onload
+ * @brief initializes global variables
+ */
+window.onload = function()
 {
     console.log("Loaded.");
     list = document.getElementById("list");
@@ -25,6 +45,10 @@ window.onload = function(e)
     loadBrowserCache();
 }
 
+/**
+ * @fn addListItem
+ * @brief Adds a item after the currently selected item. If no item is selected, add it to the end
+ */
 function addListItem()
 {
     if(selectedItem == null)
@@ -33,6 +57,10 @@ function addListItem()
         list.insertBefore(listItemTemplate.cloneNode(true), selectedItem.nextSibling);
 }
 
+/**
+ * @fn removeListItem
+ * @brief removes the currently selected list item.
+ */
 function removeListItem()
 {
     if(selectedItem != null)
@@ -42,6 +70,13 @@ function removeListItem()
     }
 }
 
+/**
+ * @fn ListItem
+ * @brief basically a class to represent a list item
+ * @param {*} key The JSON key
+ * @param {*} value  The original language text
+ * @param {*} newValue The new value to be translated
+ */
 function ListItem(key, value, newValue)
 {
     this.key = key;
@@ -49,6 +84,11 @@ function ListItem(key, value, newValue)
     this.newValue = newValue;
 }
 
+/**
+ * @fn getTextAsJSON
+ * @brief gets the values from the document returns it as a json string
+ * @return an array of ListItem
+ */
 function getTextAsJSON()
 {
     var data = [];
@@ -61,11 +101,19 @@ function getTextAsJSON()
     return data;
 }
 
-function getTextAsJSONString()
-{
-   return JSON.stringify(getTextAsJSON());
-}
+/**
+ * @fn getTextAsJSON
+ * @brief gets the values from the document returns it as a json string
+ * @return an array of ListItem as a json string
+ */
+function getTextAsJSONString() { return JSON.stringify(getTextAsJSON()); }
 
+/**
+ * @fn download
+ * @brief downloads data to the user device
+ * @param {*} data The data as a string
+ * @param {*} fileName The file name to download as
+ */
 function download(data, fileName)
 {
     console.log(data);
@@ -86,6 +134,10 @@ function download(data, fileName)
     }, 10)
 }
 
+/**
+ * @fn saveAsFile
+ * @brief saves the list to the user computer
+ */
 function saveAsFile()
 {
     fileName = fileNameInputElement.value;
@@ -93,6 +145,10 @@ function saveAsFile()
     document.getElementById('file-save-modal').style.display = 'none';
 }
 
+/**
+ * @fn saveBrowserCache
+ * @brief saves the current list to the browser cache
+ */
 function saveBrowserCache()
 {
     if(typeof(Storage) !== "undefined")
@@ -105,6 +161,11 @@ function saveBrowserCache()
     }
 }
 
+/**
+ * @fn displayLoadedJSON
+ * @brief empties the list and loads a new one from the given one
+ * @param {*} data An array of ListItem
+ */
 function displayLoadedJSON(data)
 {
     while(list.children.length != 0)
@@ -122,6 +183,10 @@ function displayLoadedJSON(data)
     });
 }
 
+/**
+ * @fn loadBrowserCache
+ * @brief loads the list from the browser cache
+ */
 function loadBrowserCache()
 {
     if(typeof(Storage) !== "undefined")
@@ -141,6 +206,10 @@ function loadBrowserCache()
     }
 }
 
+/**
+ * @fn openFileSaveDialog
+ * @brief opens the file save dialog so a user can download data
+ */
 function openFileSaveDialog()
 {
     fileNameInputElement.value = fileName;
@@ -150,6 +219,10 @@ function openFileSaveDialog()
 
 }
 
+/**
+ * @fn openFileExportDialog
+ * @brief opens the dialog for exporting a file
+ */
 function openFileExportDialog()
 {
     fileNameInputElement.value = exportFileName;
@@ -158,6 +231,10 @@ function openFileExportDialog()
     document.getElementById('file-save-modal').style.display = 'block';
 }
 
+/**
+ * @fn exportFileCallback
+ * @brief generates the JSON for exporting and downloads it
+ */
 function exportFileCallback()
 {
     exportFileName = fileNameInputElement.value;
@@ -170,20 +247,29 @@ function exportFileCallback()
     document.getElementById('file-save-modal').style.display = 'none';
 }
 
+/**
+ * @fn listItemClickHandler
+ * @brief Sets the selected list item
+ * @param {*} listItem The list item element that was clicked.
+ */
 function listItemClickHandler(listItem)
 {
     console.log(listItem.tagName);
 
     if(selectedItem != null && selectedItem != listItem)
-        selectedItem.classList.remove(SELECTED_COLOR);
+        selectedItem.classList.remove(SELECTED_CLASS);
 
     selectedItem = listItem;
 
-    if(!selectedItem.classList.contains(SELECTED_COLOR))
-        selectedItem.classList.add(SELECTED_COLOR);
+    if(!selectedItem.classList.contains(SELECTED_CLASS))
+        selectedItem.classList.add(SELECTED_CLASS);
 
 }
 
+/**
+ * @fn loadFile
+ * @brief Reads the file the user selected
+ */
 function loadFile()
 {
     var fileInput = document.getElementById("file-upload-input");
@@ -216,16 +302,29 @@ function loadFile()
     }   
 }
 
+/**
+ * @fn importJSONObject
+ * @brief loads a JSON object of key-value pairs to the user list 
+ * @param {*} data 
+ */
 function importJSONObject(data)
 {
     displayLoadedJSON(Object.keys(data).map(function(key) {return new ListItem(key, data[key], "")}));
 }
 
+/**
+ * @fn displayUploadDialog
+ * @brief displays the upload file dialog
+ */
 function displayUploadDialog()
 {
     document.getElementById("file-upload-modal").style.display = "block";
 }
 
+/**
+ * @fn clearList
+ * Clears the list and adds a blank list item node.
+ */
 function clearList()
 {
     while(list.children.length != 0)
