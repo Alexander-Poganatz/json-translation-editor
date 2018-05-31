@@ -6,27 +6,31 @@
         <meta charset="utf8" />
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
         <script src="controller.js"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
     </head>
 
     <body>
         <div class="w3-bar w3-black" style="position:fixed; margin-top:0px;">
                 <div class="w3-bar-item w3-black">JSON Tranlation Editor</div>
-                <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="addListItem()"><i class="fas fa-plus"></i></button>
-                <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="saveBrowserCache()"><i class="fas fa-save"></i></button>
-                <button class="w3-bar-item w3-button w3-right w3-border-left" onclick="openFileSaveDialog()"><i class="fas fa-download"></i></button>
-                <button class="w3-bar-item w3-button w3-right" onclick="openFileExportDialog()"><i class="fas fa-cogs"></i></button>
-                <button class="w3-bar-item w3-button w3-right" onclick="displayUploadDialog()"><i class="fas fa-upload"></i></button>
-                <button class="w3-bar-item w3-btn w3-right"><i></i></button>
-                <button class="w3-bar-item w3-button w3-right" onclick="removeListItem()"><i class="fas fa-minus"></i></button>
-                <button class="w3-bar-item w3-button w3-right" onclick="clearList()"><i class="fas fa-bomb"></i></button>
+                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black" onclick="addListItem()" title="Add"><span class="w3-large">+</span></button>
+                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black" onclick="saveBrowserCache()" title="Save"><span class="w3-large">&#128427;</span></button>
+                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black" onclick="openFileSaveDialog()" title="Download"><span class="w3-large">&#8615;</span></button>
+                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black" onclick="openFileExportDialog()" title="Export"><span class="w3-large">&#8650;</span></button>
+                <button class="w3-bar-item w3-button w3-right w3-black" onclick="displayUploadDialog()"><span class="w3-large" title="Upload">&#8613;</span></button>
+                <button class="w3-bar-item w3-btn w3-right w3-black"><i></i></button>
+                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black" onclick="removeListItem()" title="Remove selected"><span class="w3-large">-</span></button>
+                <button class="w3-bar-item w3-button w3-right w3-black" onclick="clearList()" title="Clear"><span class="w3-large">&#128465;</span></button>
         </div>
-        &nbsp;
+        <!--Padding from the fixed menu-->
+        <div class="w3-hide-medium w3-hide-large">
+            <div style="padding-top: 85px;"></div>
+        </div>
+        <div style="padding-top: 45px;"></div>
         <div class="w3-row w3-container">
             <div class="w3-third"><h2>Key</h2></div>
             <div class="w3-third"><h2>Value</h2></div>
             <div class="w3-third"><h2>New Value</h2></div>
         </div>
+        
         <!--First inner child is the list item template.-->
         <div id="list" class="w3-container">
             <div class="w3-row w3-border-dark-grey" style="margin-bottom: 8px;" onclick="listItemClickHandler(this)">
