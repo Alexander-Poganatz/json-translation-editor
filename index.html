@@ -11,19 +11,31 @@
     <body>
         <div class="w3-bar w3-black" style="position:fixed; margin-top:0px;">
                 <div class="w3-bar-item w3-black">JSON Tranlation Editor</div>
-                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black" onclick="addListItem()" title="Add"><span class="w3-large">+</span></button>
-                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black" onclick="saveBrowserCache()" title="Save"><span class="w3-large">&#128427;</span></button>
-                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black" onclick="openFileSaveDialog()" title="Download"><span class="w3-large">&#8615;</span></button>
-                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black" onclick="openFileExportDialog()" title="Export"><span class="w3-large">&#8650;</span></button>
-                <button class="w3-bar-item w3-button w3-right w3-black" onclick="displayUploadDialog()"><span class="w3-large" title="Upload">&#8613;</span></button>
-                <button class="w3-bar-item w3-btn w3-right w3-black"><i></i></button>
-                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black" onclick="removeListItem()" title="Remove selected"><span class="w3-large">-</span></button>
-                <button class="w3-bar-item w3-button w3-right w3-black" onclick="clearList()" title="Clear"><span class="w3-large">&#128465;</span></button>
+                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black w3-hide-small" onclick="addListItem()" title="Add"><span class="w3-large">+</span></button>
+                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black w3-hide-small" onclick="saveBrowserCache()" title="Save"><span class="w3-large">&#128427;</span></button>
+                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black w3-hide-small" onclick="openFileSaveDialog()" title="Download"><span class="w3-large">&#8615;</span></button>
+                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black w3-hide-small" onclick="openFileExportDialog()" title="Export"><span class="w3-large">&#8650;</span></button>
+                <button class="w3-bar-item w3-button w3-right w3-black w3-hide-small" onclick="displayUploadDialog()"><span class="w3-large" title="Upload">&#8613;</span></button>
+                <button class="w3-bar-item w3-btn w3-right w3-black w3-hide-small"><i></i></button>
+                <button class="w3-bar-item w3-button w3-right w3-border-left w3-black w3-hide-small" onclick="removeListItem()" title="Remove selected"><span class="w3-large">-</span></button>
+                <button class="w3-bar-item w3-button w3-right w3-black w3-hide-small" onclick="clearList()" title="Clear"><span class="w3-large">&#128465;</span></button>
+
+                <div class="w3-dropdown-click w3-hide-medium w3-hide-large w3-right">
+                    <button class="w3-button w3-black" onclick="toggleNavMenu()">&#128241;</button>
+                    <div id="dropdownMenu" class="w3-dropdown-content w3-bar-block w3-card" style="position:fixed;" onclick="toggleNavMenu()">
+                        <button class="w3-bar-item w3-button w3-black" onclick="addListItem()" title="Add"><span class="w3-large">+</span></button>
+                        <button class="w3-bar-item w3-button w3-black" onclick="saveBrowserCache()" title="Save"><span class="w3-large">&#128427;</span></button>
+                        <button class="w3-bar-item w3-button w3-black" onclick="openFileSaveDialog()" title="Download"><span class="w3-large">&#8615;</span></button>
+                        <button class="w3-bar-item w3-button w3-black" onclick="openFileExportDialog()" title="Export"><span class="w3-large">&#8650;</span></button>
+                        <button class="w3-bar-item w3-button w3-black" onclick="displayUploadDialog()"><span class="w3-large" title="Upload">&#8613;</span></button>
+                        <button class="w3-bar-item w3-btn w3-black"><i></i></button>
+                        <button class="w3-bar-item w3-button w3-black" onclick="removeListItem()" title="Remove selected"><span class="w3-large">-</span></button>
+                        <button class="w3-bar-item w3-button w3-black" onclick="clearList()" title="Clear"><span class="w3-large">&#128465;</span></button>
+                    </div>
+                </div>
         </div>
+
         <!--Padding from the fixed menu-->
-        <div class="w3-hide-medium w3-hide-large">
-            <div style="padding-top: 85px;"></div>
-        </div>
         <div style="padding-top: 45px;"></div>
         <div class="w3-row w3-container">
             <div class="w3-third"><h2>Key</h2></div>

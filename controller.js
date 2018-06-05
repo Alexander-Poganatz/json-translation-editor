@@ -10,6 +10,7 @@
 
 var listItemTemplate; // Generic list item node to clone
 var list; // Reference to the list element
+var dropdownElement;
 
 // Index in an array of input elements
 const KEY_INDEX = 0;
@@ -40,6 +41,8 @@ window.onload = function()
     list = document.getElementById("list");
     listItemTemplate = list.firstElementChild.cloneNode(true);
     fileNameInputElement = document.getElementById('file-name-input');
+
+    dropdownElement = document.getElementById("dropdownMenu");
 
     // After variables are initalized, call other functions as needed.
     loadBrowserCache();
@@ -331,4 +334,17 @@ function clearList()
             list.removeChild(list.lastElementChild);
 
     list.appendChild(listItemTemplate.cloneNode(true));
+}
+
+/**
+ * @fn toggleNavMenu
+ * @brief toggles the dropdown menu
+ */
+function toggleNavMenu()
+{
+    var w3Show = 'w3-show';
+    if(dropdownElement.classList.contains(w3Show) == false)
+        dropdownElement.classList.add(w3Show);
+    else
+        dropdownElement.classList.remove(w3Show);
 }
